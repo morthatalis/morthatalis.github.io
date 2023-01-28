@@ -1,2 +1,10 @@
-###### Morthatalis's site
-# This page right now is literally nothing since i'm still working on this silly website lol
+# Morthatalis's site
+## you would think that this website just nothing..
+## you're probably right.
+____
+# links ig
+## www.youtu.be/mustafa2450
+## www.twitter.com/Morthatalis
+## www.roblox.com/users/1598581117
+____
+###### made by www.github.com/morthatalis
