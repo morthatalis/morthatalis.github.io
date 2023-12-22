@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Pop-up Button</title>
+</head>
+<body>
+
+<button onclick="openWebsitePopup()">Open Website Pop-up</button>
+
+<script>
+    function openWebsitePopup() {
+        var websiteURL = 'https://oldgoogle.neocities.org/2009/';
+        var windowFeatures = 'width=800,height=600,menubar=no,toolbar=no,resizable=no,scrollbars=no,status=no';
+        window.open(websiteURL, '_blank', windowFeatures);
+    }
+</script>
+
+</body>
+</html>
