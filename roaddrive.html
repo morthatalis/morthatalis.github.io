@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Driving Game</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+        #distance {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: white;
+            font-size: 24px;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <div id="distance">Distance: 0</div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // Set up the scene, camera, and renderer
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x00FFFF); // Set background color to cyan
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        // Create a basic car
+        const carGeometry = new THREE.BoxGeometry(1, 1, 2);
+        const carMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+        const car = new THREE.Mesh(carGeometry, carMaterial);
+        car.position.y = 0.5;
+        scene.add(car);
+
+        // Create the grass terrain
+        const grassGeometry = new THREE.PlaneGeometry(1000, 1000);
+        const grassMaterial = new THREE.MeshBasicMaterial({ color: 0x228B22 });
+        const grass = new THREE.Mesh(grassGeometry, grassMaterial);
+        grass.rotation.x = -Math.PI / 2;
+        scene.add(grass);
+
+        // Create the road, positioned slightly above the grass
+        const roadGeometry = new THREE.PlaneGeometry(10, 1000);
+        const roadMaterial = new THREE.MeshBasicMaterial({ color: 0x444444 });
+        const road = new THREE.Mesh(roadGeometry, roadMaterial);
+        road.rotation.x = -Math.PI / 2;
+        road.position.set(0, 0.01, -500); // Slightly above the grass
+        scene.add(road);
+
+        // Create terrain features (simple boxes)
+        const terrainGeometry = new THREE.BoxGeometry(5, 2, 5);
+        const terrainMaterial = new THREE.MeshBasicMaterial({ color: 0x8B4513 });
+        const terrain1 = new THREE.Mesh(terrainGeometry, terrainMaterial);
+        terrain1.position.set(-10, 1, -20);
+        scene.add(terrain1);
+
+        const terrain2 = new THREE.Mesh(terrainGeometry, terrainMaterial);
+        terrain2.position.set(15, 1, -40);
+        scene.add(terrain2);
+
+        const terrain3 = new THREE.Mesh(terrainGeometry, terrainMaterial);
+        terrain3.position.set(-15, 1, -60);
+        scene.add(terrain3);
+
+        // Position the camera
+        camera.position.z = 5;
+        camera.position.y = 2;
+        camera.lookAt(car.position);
+
+        // Add basic lighting
+        const light = new THREE.AmbientLight(0x404040);
+        scene.add(light);
+
+        // Car movement variables
+        const carSpeed = 0.1;
+        let carDirection = 0;
+        const maxCarPositionX = roadGeometry.parameters.width / 2 - carGeometry.parameters.width / 2;
+
+        // Distance driven variable
+        let distanceDriven = 0;
+        const distanceElement = document.getElementById('distance');
+
+        // Event listeners for car movement
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'a' || event.key === 'A') {
+                carDirection = -1;
+            } else if (event.key === 'd' || event.key === 'D') {
+                carDirection = 1;
+            }
+        });
+
+        document.addEventListener('keyup', function(event) {
+            if (event.key === 'a' || event.key === 'A' || event.key === 'd' || event.key === 'D') {
+                carDirection = 0;
+            }
+        });
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Move the car
+            car.position.x += carSpeed * carDirection;
+
+            // Keep the car within the road boundaries
+            if (car.position.x > maxCarPositionX) {
+                car.position.x = maxCarPositionX;
+            } else if (car.position.x < -maxCarPositionX) {
+                car.position.x = -maxCarPositionX;
+            }
+
+            // Move the road (simulate the car moving forward)
+            road.position.z += carSpeed * 2;
+            if (road.position.z > 0) {
+                road.position.z = -500;
+            }
+
+            // Move the terrain features (simulate the car moving forward)
+            terrain1.position.z += carSpeed * 2;
+            terrain2.position.z += carSpeed * 2;
+            terrain3.position.z += carSpeed * 2;
+
+            // Loop the terrain features
+            if (terrain1.position.z > 5) {
+                terrain1.position.z = -100;
+            }
+            if (terrain2.position.z > 5) {
+                terrain2.position.z = -100;
+            }
+            if (terrain3.position.z > 5) {
+                terrain3.position.z = -100;
+            }
+
+            // Update camera to follow the car
+            camera.position.x = car.position.x;
+            camera.position.z = car.position.z + 5;
+            camera.lookAt(car.position);
+
+            // Update the distance driven
+            distanceDriven += carSpeed * 2;
+            distanceElement.textContent = `Distance: ${Math.floor(distanceDriven)}`;
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // Handle window resizing
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>
