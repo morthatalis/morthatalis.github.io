@@ -1,34 +1,219 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>ToastedSoup</title>
-	<style>
-		whitetext{ color:black; font-family: sans-serif; }
-	</style>
-</head>
-<body style="background-color: indianred;">
-	<whitetext>
-	<h1>About me</h1>
-	<h2>Hey there!</h2>
-	<h2>I'm ToastedSoup,</h2>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ToastedSoup — Portfolio</title>
+  <meta name="description" content="Personal website of ToastedSoup." />
+  <meta name="theme-color" content="#0ea5e9" />
 
-	<h2>I'm a programmer from the netherlands</h2>
-	<h2>and I've been programming since 2022</h2>
-	<h3>and I also like a wide range of topics.. and cats :3.</h3>
-	<h2>I use (and know) the programming languages:</h2>
-	<h2>C#, Lua(u) and js</h2>
-	<h2>My projects I'm working on right now is <a href="https://www.roblox.com/games/15860606042/Dreamscape-BETA">Dreamscape</a>, a roblox in-game revival,</h2>
-	<h2>and <a href="https://github.com/morthatalis/RobloxTurboTool">RobloxTurboTool</a>, a tool that filters the roblox logs</h2>
-	<h2>and makes it easier to do more stuff that you can't do with roblox itself</h2>
-	<h3>although this program only works on windows (as far as i know)</h3>
-	<h1>Links</h1>
-	<h2> <a href="https://www.youtube.com/@thetoastedsoup">My Youtube Page</a> </h2>
-	<h2> <a href="https://github.com/morthatalis">My Github Page</a> </h2>
-	<h2> <a href="https://www.roblox.com/users/1598581117/profile">My Roblox Profile</a> </h2>
-	<h2> <a href="https://x.com/Morthatalis">My X(Twitter) Profile</a> (dm me here if you wanna talk to me, but I dont regularly check twitter though)</h2>
-	<h3>and i dont like to give my discord name out to everyone</h3>
-	</whitetext>
+  <!--<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%9F%3C/text%3E%3C/svg%3E" /> -->
+
+  <style>
+    :root {
+      --bg: #0b1020;
+      --surface: #0f172a;
+      --muted: #94a3b8;
+      --text: #e2e8f0;
+      --brand: #0ea5e9;
+      --brand-contrast: #081a22;
+      --ring: 0 0 0 3px rgba(14,165,233,.35);
+      --card: #0b1220;
+      --shadow: 0 10px 30px rgba(2, 6, 23, .45);
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f8fafc;
+        --surface: #ffffff;
+        --card: #ffffff;
+        --muted: #475569;
+        --text: #0f172a;
+        --brand: #0ea5e9;
+        --brand-contrast: #e0f2fe;
+        --shadow: 0 10px 24px rgba(2, 6, 23, .08);
+      }
+    }
+    html[data-theme="dark"] {
+      --bg: #0b1020; --surface:#0f172a; --card:#0b1220; --muted:#94a3b8; --text:#e2e8f0; --brand:#0ea5e9; --brand-contrast:#081a22; --shadow:0 10px 30px rgba(2,6,23,.45);
+    }
+    html[data-theme="light"] {
+      --bg:#f8fafc; --surface:#ffffff; --card:#ffffff; --muted:#475569; --text:#0f172a; --brand:#0ea5e9; --brand-contrast:#e0f2fe; --shadow:0 10px 24px rgba(2,6,23,.08);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font: 16px/1.6 Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Ubuntu, Cantarell, Noto Sans, "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+      color: var(--text);
+      background: radial-gradient(1200px 800px at 100% -10%, rgba(14,165,233,.12), transparent 40%),
+                  radial-gradient(900px 600px at -10% -10%, rgba(99,102,241,.12), transparent 40%),
+                  var(--bg);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container { width: min(1100px, 92vw); margin: 0 auto; }
+    .grid { display: grid; gap: 1.25rem; }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    @media (max-width: 920px){ .grid-3{ grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 720px){ .grid-2, .grid-3{ grid-template-columns: 1fr; } }
+
+    a { color: inherit; text-decoration: none; }
+    a[href]:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible { outline: none; box-shadow: var(--ring); border-radius: 12px; }
+
+    header {
+      position: sticky; top: 0; z-index: 40;
+      backdrop-filter: saturate(180%) blur(10px);
+      background: color-mix(in oklab, var(--surface) 66%, transparent);
+      border-bottom: 1px solid color-mix(in oklab, var(--text) 10%, transparent);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; padding: .8rem 0; }
+    .brand { display: inline-flex; align-items: center; gap: .6rem; font-weight: 700; letter-spacing: .2px; }
+    .brand .logo { width: 36px; height: 36px; display:grid; place-items:center; border-radius: 14px; background: var(--brand-contrast); box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--brand) 30%, transparent); }
+    nav a { padding: .55rem .8rem; border-radius: 10px; opacity: .9; }
+    nav a:hover { background: color-mix(in oklab, var(--text) 8%, transparent); opacity: 1; }
+
+    .btn { display:inline-flex; align-items:center; gap:.5rem; padding:.7rem 1rem; border:1px solid color-mix(in oklab, var(--text) 10%, transparent); background: linear-gradient(180deg, color-mix(in oklab, var(--surface) 85%, transparent), color-mix(in oklab, var(--surface) 65%, transparent)); border-radius: 14px; box-shadow: var(--shadow); cursor:pointer; }
+    .btn.primary { background: linear-gradient(180deg, color-mix(in oklab, var(--brand) 30%, var(--surface)), color-mix(in oklab, var(--brand) 15%, var(--surface))); border: 1px solid color-mix(in oklab, var(--brand) 45%, transparent); }
+
+    .hero { padding: 6rem 0 3rem; }
+    .hero h1 { font-size: clamp(2rem, 6vw, 3.5rem); line-height: 1.1; margin: 0 0 1rem; }
+    .hero p.lead { font-size: clamp(1.05rem, 2.2vw, 1.25rem); color: var(--muted); margin: 0 0 1.25rem; }
+    .avatar { width: 80px; height: 80px; border-radius: 50%; background: url('https://avatars.githubusercontent.com/u/9919?v=4') center/cover no-repeat, var(--brand-contrast); border: 2px solid color-mix(in oklab, var(--brand) 40%, transparent); box-shadow: var(--shadow); }
+
+    section { padding: 3rem 0; }
+    h2 { font-size: clamp(1.4rem, 2.4vw, 2rem); margin: 0 0 1rem; }
+    .muted { color: var(--muted); }
+
+    .card { background: var(--card); border: 1px solid color-mix(in oklab, var(--text) 12%, transparent); border-radius: 18px; padding: 1.1rem; box-shadow: var(--shadow); }
+    .tag { display:inline-flex; align-items:center; padding:.35rem .6rem; border-radius:999px; border:1px solid color-mix(in oklab, var(--text) 15%, transparent); font-size:.8rem; opacity:.9; }
+
+    footer { border-top: 1px solid color-mix(in oklab, var(--text) 10%, transparent); padding: 2rem 0 4rem; color: var(--muted); font-size: .95rem; }
+
+    .prose p { margin: .7rem 0; }
+    .prose ul { padding-left: 1rem; }
+    .prose li { margin: .4rem 0; }
+
+    .skip-link { position: absolute; left: -999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+    .skip-link:focus { left: 1rem; top: 1rem; width: auto; height: auto; background: var(--brand); color: white; padding: .5rem .75rem; border-radius: 10px; }
+
+    @media print {
+      header, .hero .actions, .contact-actions, .theme-toggle { display: none !important; }
+      body { background: #fff; color: #000; }
+      .card, .btn { box-shadow: none; }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Your Name",
+    "url": "https://example.com",
+    "sameAs": ["https://github.com/yourhandle", "https://www.linkedin.com/in/yourhandle"],
+    "jobTitle": "Your Role",
+    "description": "Short bio about what you do and what you love building."
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header>
+    <div class="container nav" role="navigation" aria-label="Main">
+      <a class="brand" href="#top" aria-label="Homepage">
+        <span>ToastedSoup</span>
+      </a>
+      <nav>
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Hero -->
+    <section class="hero container grid grid-2" id="top">
+      <div>
+        <h1>Hey there, I’m <span style="color:var(--brand);">ToastedSoup</span>.</h1>
+        <p class="lead">I program/script roblox games, windows programs and sometimes websites.</p>
+        <div class="actions" style="display:flex; gap:.6rem; flex-wrap:wrap; margin-top: .8rem;">
+          <a class="btn primary" href="#projects">See my work</a>
+        </div>
+      </div>
+      <div class="card prose">
+        <h2 style="margin-top:0">What I do</h2>
+        <ul>
+          <li>Design & develop web apps using JS.</li>
+          <li>Develop a full C# Program.</li>
+          <li>Create a whole roblox game without a hitch.</li>
+        </ul>
+        <div style="display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.6rem">
+          <span class="tag">C#</span>
+          <span class="tag">Lua(u)</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">Node</span>
+          <span class="tag">CSS</span>
+          </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="container">
+      <h2>Selected Projects</h2>
+      <p class="muted">A few things I'm proud of. More on <a href="https://github.com/morthatalis">GitHub</a>.</p>
+
+      <div class="grid grid-3" style="margin-top:1rem">
+        <!-- Project Card 1 -->
+        <article class="card" aria-labelledby="proj1-title">
+          <div style="display:flex; justify-content:space-between; align-items:center; gap: .5rem;">
+            <h3 id="proj1-title" style="margin:.2rem 0;">RobloxTurboTool</h3>
+            <span class="tag">2025</span>
+          </div>
+          <p>A program meant for roblox that gives you the ability to do alot more with the roblox client.</p>
+          <div class="grid" style="gap:.7rem">
+            <div class="tag">C#</div>
+            <div class="tag">.Net</div>
+            </div>
+          <div style="display:flex; gap:.6rem; margin-top:.8rem; flex-wrap:wrap;">
+            <a class="btn" href="https://github.com/morthatalis/RobloxTurboTool" target="_blank" rel="noopener">Source Code</a>
+          </div>
+        </article>
+
+        <!-- Project Card 2 -->
+        <article class="card" aria-labelledby="proj2-title">
+          <div style="display:flex; justify-content:space-between; align-items:center; gap: .5rem;">
+            <h3 id="proj2-title" style="margin:.2rem 0;">Dreamscape</h3>
+            <span class="tag">2024</span>
+          </div>
+          <p>A roblox game serves an recreation of the roblox experience approx. 10 years ago</p>
+          <div class="grid" style="gap:.7rem">
+            <div class="tag">Luau</div>
+          </div>
+          <div style="display:flex; gap:.6rem; margin-top:.8rem; flex-wrap:wrap;">
+            <a class="btn" href="https://www.roblox.com/games/15860606042/Dreamscape-BETA" target="_blank" rel="noopener">Game Page</a>
+          </div>
+        </article>
+
+        
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="container grid grid-2">
+      <div class="prose">
+        <h2>About</h2>
+        <p>A nerd that has alot of time to play around with & learn programming languages, including C#, Lua(u) and JS. And I like a big range of different topics... including liking cats :3</p>
+      </div>
+    </section>
+
+  <script>
+	  const html = document.documentElement;
+      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+  </script>
 </body>
 </html>
