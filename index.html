@@ -63,7 +63,7 @@
 
     a { color: inherit; text-decoration: none; }
     a[href]:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible { outline: none; box-shadow: var(--ring); border-radius: 12px; }
-
+    .link{ color:indianred; !important; }
     header {
       position: sticky; top: 0; z-index: 40;
       backdrop-filter: saturate(180%) blur(10px);
@@ -106,18 +106,6 @@
       .card, .btn { box-shadow: none; }
     }
   </style>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Your Name",
-    "url": "https://example.com",
-    "sameAs": ["https://github.com/yourhandle", "https://www.linkedin.com/in/yourhandle"],
-    "jobTitle": "Your Role",
-    "description": "Short bio about what you do and what you love building."
-  }
-  </script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -129,6 +117,7 @@
       <nav>
         <a href="#projects">Projects</a>
         <a href="#about">About</a>
+        <a href="#Links">Links</a>
       </nav>
     </div>
   </header>
@@ -138,7 +127,7 @@
     <section class="hero container grid grid-2" id="top">
       <div>
         <h1>Hey there, I’m <span style="color:var(--brand);">ToastedSoup</span>.</h1>
-        <p class="lead">I program/script roblox games, windows programs and sometimes websites.</p>
+        <h3 class="lead">I program/script roblox games, windows programs and sometimes websites.</h3>
         <div class="actions" style="display:flex; gap:.6rem; flex-wrap:wrap; margin-top: .8rem;">
           <a class="btn primary" href="#projects">See my work</a>
         </div>
@@ -163,7 +152,7 @@
     <!-- Projects -->
     <section id="projects" class="container">
       <h2>Selected Projects</h2>
-      <p class="muted">A few things I'm proud of. More on <a href="https://github.com/morthatalis">GitHub</a>.</p>
+      <p class="muted link">A few things I'm proud of. More on <a href="https://github.com/morthatalis">GitHub</a>.</p>
 
       <div class="grid grid-3" style="margin-top:1rem">
         <!-- Project Card 1 -->
@@ -181,7 +170,6 @@
             <a class="btn" href="https://github.com/morthatalis/RobloxTurboTool" target="_blank" rel="noopener">Source Code</a>
           </div>
         </article>
-
         <!-- Project Card 2 -->
         <article class="card" aria-labelledby="proj2-title">
           <div style="display:flex; justify-content:space-between; align-items:center; gap: .5rem;">
@@ -205,12 +193,29 @@
     <section id="about" class="container grid grid-2">
       <div class="prose">
         <h2>About</h2>
-        <p>A nerd that has alot of time to play around with & learn programming languages, including C#, Lua(u) and JS. And I like a big range of different topics... including liking cats :3</p>
+        <h3>A nerd that has alot of time to play around with & learn programming languages, including C#, Lua(u) and JS. And I like a big range of different topics... including liking cats :3</h3>
       </div>
     </section>
-
+    <section id="Links" class="container grid grid-2 ">
+      <div class="prose">
+        <h2>Links</h2>
+        <h3>
+        <a href="https://www.youtube.com/@thetoastedsoup" class="">My YouTube Page</a>
+        
+        <p>
+        <a href="https://www.github.com/morthatalis" class="">My GitHub Page</a>
+        </p>
+        <p>
+        <a href="https://www.x.com/morthatalis" class="">My Twitter(x) Page</a>
+        </p>
+        <p>
+        <a href="https://www.roblox.com/users/1598581117/profile" class="">My Roblox Account</a>
+        </p>
+        </h3>
+      </div>
+    </section>
   <script>
-	  const html = document.documentElement;
+    const html = document.documentElement;
       const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
       html.setAttribute('data-theme', next);
       localStorage.setItem('theme', next);
